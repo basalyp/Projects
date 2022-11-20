@@ -7,4 +7,6 @@ Welcome to my Python Repository, in here you can find some of my work which incl
 	• GUI (General User Interferance) using tkinter lab
 	• Password Generator
 	• Classes
+	• GUI Tic Tac Toe 
+	
 	
