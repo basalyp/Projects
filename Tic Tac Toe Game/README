@@ -1,0 +1,5 @@
+This is a work in progress where I focus on three main topics: Developing a game, Creating a GUI & Implementing an AI to play against.
+
+So far, I have developed an Interactive GUI of the Main Menu of the game. My next task is the development of the game itself where it will a 1v1 game
+
+Next and Finally, I will try and create an AI which we can compete against. Instead of playing the game on the Python IDLE, I wanted to challenge myself with the GUI.
