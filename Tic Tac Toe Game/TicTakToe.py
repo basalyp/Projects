@@ -5,7 +5,7 @@ import random
 counter = 0
 
 #Game = np.zeros((3,3))
-Game = [[0,0,0],[0,0,0],[0,0,0]]
+Game= [[0,0,0],[0,0,0],[0,0,0]]
 #print(Game)
 
 windows = Tk()
@@ -22,9 +22,12 @@ entryB.grid(row=1,column=2)
 
 def newgame ():
     pass
+
+#def next_turn(row,column):
+ #   pass
     
 def gamewindow():
-    global counter
+    global counter  #To Modify variable outsideof scope
     if counter <1:
         Player2 = entryB.get()
         Player1 = entryA.get()
@@ -35,6 +38,15 @@ def gamewindow():
         win.title("Tic Tac Toe")
         sent2 = Label(win,text= Pl_choice + " Turn", font=40)
         sent2.pack()
+
+        frame = Frame(win)
+        frame.pack()
+        
+        for row in range(3):
+            for column in range(3):
+                Game[row][column]=Button(frame,text="", width=20, height = 10, command = lambda row=row,column=column : next_turn(row,column))
+                Game[row][column].grid(row=row,column=column)
+                
         reset = Button(win,text= " Restart Game", font = 40, command = newgame())
         reset.pack()
         counter = counter + 1
