@@ -36,12 +36,12 @@ def emptyspace():
     return EmptySpaces
 def checkwinner():
     for row in range (3):
-        if Game[row][0]['text'] == Game[row][1]['text'] and Game[row][1]== Game[row][2]['text'] != "":
+        if Game[row][0]['text'] == Game[row][1]['text'] == Game[row][2]['text'] != "":
             return True
     for column in range(3):
-        if Game[0][column]['text'] == Game[1][column]['text'] and Game[1][column]== Game[2][column]['text']!="":
+        if Game[0][column]['text'] == Game[1][column]['text']== Game[2][column]['text']!="":
             return True
-    if (Game[0][0]['text'] == Game[1][1]['text']== Game[2][2]['text']) or (Game[2][0]['text'] == Game[1][1]['text']== Game[0][2]['text'])!= "":
+    if (Game[0][0]['text'] == Game[1][1]['text']== Game[2][2]['text']!="") or (Game[2][0]['text'] == Game[1][1]['text']== Game[0][2]['text']!= ""):
         return True
     elif emptyspace() is False:
         return "TIE"
@@ -55,40 +55,48 @@ def checkwinner():
 def next_turn(row,column):
     global Plturn
     global randplayer
-    if Game[row][column]['text']== "" and checkwinner() is False: #Access the text of the Button
+    global Pl_coice
+    global win
+    global sent2
+    
+    if (Game[row][column]['text']== "")and (checkwinner() is False):#Access the text of the Button
+        print('x')
         if Plturn == randplayer[0]:
             Game[row][column]['text']=randplayer[0]
             if checkwinner() is False:
                 Plturn = randplayer[1]
-                label.config(win, text=randplayer[0]+ "turn")
+                sent2.config(text=(randplayer[1]+ " turn"))
             elif checkwinner() is True:
                 win3 = Toplevel(win)
                 win3.title("Winner Winner CHicken Dinner")
-                winner1 = Label (text="Winner Winner Chicken Dinner")
+                winner1 = Label (win3,text="Winner Winner Chicken Dinner")
                 winner1.pack()
+                sent2.config(text=("We have a winner"))
             elif checkwinner() == "TIE":
                 win3 = Toplevel(win)
                 win3.title("OH NOOOO IT IS A TIE :(")
-                winner1 = Label (text="ON NO IT IS A TIE, Never seen an equally matched skilled opponent in my life ")
+                winner1 = Label (win3,text="ON NO IT IS A TIE, Never seen an equally matched skilled opponent in my life ")
                 winner1.pack()
                 Plturn = randplayer[0]
                 
             
         else:
+            print('y')
             Game[row][column]['text']=randplayer[1]
             if checkwinner() is False:
                 Plturn= randplayer[0]
-                label.config(win,randplayer[1] + 'turn')
+                sent2.config(text = (randplayer[0] + ' turn'))
             elif checkwinner() is True:
                 win3 = Toplevel(win)
                 win3.title("Winner Winner CHicken Dinner")
-                winner1 = Label (text="Winner Winner Chicken Dinner")
+                winner1 = Label (win3,text="Winner Winner Chicken Dinner")
                 winner1.pack()
-                Plturn = randplayer[0]
+                sent2.config(text=("We have a winner"))
+            
             elif checkwinner() == "TIE":
                 win3 = Toplevel(win)
                 win3.title("OH NOOOO IT IS A TIE :(")
-                winner1 = Label (text="ON NO IT IS A TIE, Never seen an equally matched skilled opponent in my life ")
+                winner1 = Label (win3,text="ON NO IT IS A TIE, Never seen an equally matched skilled opponent in my life ")
                 winner1.pack()
                 Plturn = randplayer[0]
                 
@@ -99,7 +107,10 @@ def next_turn(row,column):
 def gamewindow():
     global counter  #To Modify variable outsideof scope
     global randplayer
+    global Pl_choice
     global Plturn
+    global win
+    global sent2
     if counter <1:
         Player2 = entryB.get()
         Player1 = entryA.get()
@@ -117,7 +128,7 @@ def gamewindow():
         
         for row in range(3):
             for column in range(3):
-                Game[row][column]=Button(frame,text="", width=20, height = 10, command = next_turn(row,column))
+                Game[row][column]=Button(frame,text="", width=20, height = 10, command = lambda row=row,column=column : next_turn(row,column))
                 Game[row][column].grid(row=row,column=column)
                 
         reset = Button(win,text= " Restart Game", font = 40, command = newgame())
