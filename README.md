@@ -8,5 +8,6 @@ Welcome to my Python Repository, in here you can find some of my work which incl
 	• Password Generator
 	• Classes
 	• GUI Tic Tac Toe 
+	• Find Doubles in a list
 	
 	
